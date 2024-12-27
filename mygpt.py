@@ -1,4 +1,6 @@
 import streamlit as st
+st.set_page_config(page_title="MyGPT", layout="wide")
+
 from openai import OpenAI
 import json
 import os
