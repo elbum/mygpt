@@ -20,6 +20,10 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 def main():
+    # Load OpenAI API key from environment variable
+    if "openai_api_key" not in st.session_state:
+        st.session_state.openai_api_key = os.environ.get("OPENAI_API_KEY")
+        # print("API Key: ", st.session_state.openai_api_key)
     client = OpenAI(api_key=st.session_state.openai_api_key)
 
     # Set a default model
@@ -56,23 +60,25 @@ def main():
             response = st.write_stream(stream)
         st.session_state.messages.append({"role": "assistant", "content": response})
 
-if 'openai_api_key' in st.session_state and st.session_state.openai_api_key:
-    main()
-else:
-    print("ELSE Running")
-    # if the DB_FILE not exists, create it
-    if not os.path.exists(DB_FILE):
-        with open(DB_FILE, 'w') as file:
-            db = {
-                'openai_api_keys': [],
-                'chat_history': []
-            }
-            json.dump(db, file)
-    # load the database
-    else:
-        with open(DB_FILE, 'r') as file:
-            db = json.load(file)
+# if 'openai_api_key' in st.session_state and st.session_state.openai_api_key:
+# print(os.environ.get("OPENAI_API_KEY"))
+main()
 
-    st.success("Key load successfully.")
-    st.session_state['openai_api_key'] = db['openai_api_keys']
-    st.rerun()
+# else:
+#     print("ELSE Running")
+#     # if the DB_FILE not exists, create it
+#     if not os.path.exists(DB_FILE):
+#         with open(DB_FILE, 'w') as file:
+#             db = {
+#                 'openai_api_keys': [],
+#                 'chat_history': []
+#             }
+#             json.dump(db, file)
+#     # load the database
+#     else:
+#         with open(DB_FILE, 'r') as file:
+#             db = json.load(file)
+
+#     st.success("Key load successfully.")
+#     st.session_state['openai_api_key'] = db['openai_api_keys']
+#     st.rerun()
