@@ -23,7 +23,7 @@ def translate_text(text, target_language="English"):
                 {"role": "system", "content": "You are a helpful assistant that translates Korean to English."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=10000,
+            max_tokens=2000,
             n=1,
             stop=None,
             temperature=0.3,
