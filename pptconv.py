@@ -8,7 +8,6 @@ import os
 # Load OpenAI API key from environment variable
 if "openai_api_key" not in st.session_state:
     st.session_state.openai_api_key = os.environ.get("OPENAI_API_KEY")
-    # print("API Key: ", st.session_state.openai_api_key)
 client = OpenAI(api_key=st.session_state.openai_api_key)
 
 def translate_text(text, target_language="English"):
@@ -24,7 +23,7 @@ def translate_text(text, target_language="English"):
                 {"role": "system", "content": "You are a helpful assistant that translates Korean to English."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=1000,
+            max_tokens=10000,
             n=1,
             stop=None,
             temperature=0.3,
@@ -73,7 +72,7 @@ def create_ppt_with_translated_text(original_ppt_stream, translated_slides_text)
     return output_stream
 
 def main():
-    st.set_page_config(page_title="한글 PPT를 영어로 변환", layout="centered")
+    st.set_page_config(page_title="한글 PPT를 영어로 변환", layout="centered",page_icon="✨")
     st.title("PPT Translator for AGS")
     st.write("이일범 짱.")
 
@@ -122,7 +121,7 @@ def main():
         st.download_button(
             label="영문 PPT 파일 다운로드",
             data=translated_ppt_stream,
-            file_name="output_english.pptx",
+            file_name=uploaded_file.name.split(".")[0]+"_en.pptx",
             mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
         )
         st.balloons()
