@@ -53,4 +53,3 @@ tzdata==2024.2
 urllib3==2.3.0
 wheel==0.44.0
 python-pptx==1.0.2  
-ppt==0.0.7.1
