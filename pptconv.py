@@ -63,7 +63,7 @@ def create_ppt_with_translated_text(original_ppt_stream, translated_slides_text)
                     # 글꼴 크기나 스타일 조정
                     for paragraph in shape.text_frame.paragraphs:
                         for run in paragraph.runs:
-                            run.font.size = Pt(18)
+                            run.font.size = Pt(10)
                     text_idx += 1
     # PPT을 메모리에 저장
     output_stream = io.BytesIO()
